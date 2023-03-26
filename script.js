@@ -81,5 +81,6 @@ function createTimeblock(hourObj) {
     });
   }
   
-
+  displayCurrentDate();
+  createTimeblocks();
   
