@@ -74,3 +74,13 @@ function createTimeblock(hourObj) {
     return timeblock;
   }
   
+  function createTimeblocks() {
+    businessHours.forEach((hourObj) => {
+      const timeblock = createTimeblock(hourObj);
+      timeblocksContainer.appendChild(timeblock);
+    });
+  }
+  
+  displayCurrentDate();
+  createTimeblocks();
+  
