@@ -39,3 +39,38 @@ function displayCurrentDate() {
   currentDateElement.innerText = formattedDate;
 }
 
+function createTimeblock(hourObj) {
+    const timeblock = document.createElement('div');
+    timeblock.classList.add('timeblock');
+  
+    const timeEl = document.createElement('div');
+    timeEl.classList.add('time');
+    timeEl.textContent = hourObj.time;
+    timeblock.appendChild(timeEl);
+  
+    const eventEl = document.createElement('textarea');
+    eventEl.classList.add('event');
+    eventEl.dataset.hour = hourObj.hour;
+    eventEl.value = localStorage.getItem(hourObj.hour) || '';
+    timeblock.appendChild(eventEl);
+  
+    const saveBtn = document.createElement('button');
+    saveBtn.classList.add('save-btn');
+    saveBtn.textContent = 'Save';
+    saveBtn.addEventListener('click', () => {
+      localStorage.setItem(hourObj.hour, eventEl.value);
+    });
+    timeblock.appendChild(saveBtn);
+  
+    const currentHour = new Date().getHours();
+    if (hourObj.hour < currentHour) {
+      eventEl.classList.add('past');
+    } else if (hourObj.hour === currentHour) {
+      eventEl.classList.add('present');
+    } else {
+      eventEl.classList.add('future');
+    }
+  
+    return timeblock;
+  }
+  
